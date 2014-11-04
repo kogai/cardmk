@@ -1,0 +1,21 @@
+{
+  "name": "cardmk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.0",
+    "vue": "~0.10.6"
+  },
+  "authors": [
+    "小飼慎一"
+  ],
+  "license": "MIT"
+}
