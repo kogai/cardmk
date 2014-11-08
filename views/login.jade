@@ -4,6 +4,10 @@ block content
 	h1= title
 	p Login to #{title}
 	.btn-group
-		button(type='button' , class='btn btn-default btn-sm') 新規登録	
 		button(type='button' , class='btn btn-default btn-sm') ログイン
 		button(type='button' , class='btn btn-default btn-sm') ログアウト
+	.input-group.input-group-sm
+		input.form-control(type='text', placeholder='Username')
+		input.form-control(type='password', placeholder='Password')
+	.btn-group
+		button(type='button' , class='btn btn-default btn-sm') 新規登録

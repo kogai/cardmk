@@ -21,14 +21,14 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            files: ['public/js/*.js'],
+            files: ['public/javascripts/*.js'],
             options: {
                 globals: {
                     jQuery: true,
                     console: true,
                     module: true
                 },
-                ignores : ['public/js/_analytics.js'],
+                ignores : ['public/javascripts/_analytics.js'],
                 force : true
             }
         },
@@ -37,18 +37,18 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['public/js/*.js'],
-                dest: 'public/js/min/functions.min.js'
+                src: ['public/javascripts/*.js'],
+                dest: 'public/javascripts/min/functions.min.js'
             }
         },
         uglify: {
             my_target: {
                 options: {
                     sourceMap: true,
-                    sourceMapName: 'public/js/min/functions.min.map'
+                    sourceMapName: 'public/javascripts/min/functions.min.map'
                 },
                 files: {
-                    'public/js/min/functions.min.js': ['public/js/*.js']
+                    'public/javascripts/min/functions.min.js': ['public/javascripts/*.js']
                 }
             }
         },
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
                 options : {
                     outputStyle: 'nested',
                     sassDir : 'public/stylesheets/sass' , 
-                    cssDir : 'public/sass/lint'
+                    cssDir : 'public/stylesheets/sass/lint'
                 }
             },
             dist : {
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
                 }
             },
             js : {
-                files: [ 'public/js/*.js' ],
+                files: [ 'public/javascripts/*.js' ],
                 tasks: [ 'jshint' , 'concat', 'uglify' ],
                 options: {
                     livereload: true,

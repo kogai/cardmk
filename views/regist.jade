@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	h1= title
+	p Regist to #{title}
+	.input-group.input-group-sm
+		input.form-control(type='text', placeholder='Username')
+		input.form-control(type='password', placeholder='Password')
+	.btn-group
+		button(type='button' , class='btn btn-default btn-sm') 新規登録
