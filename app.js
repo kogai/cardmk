@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
 var regist = require('./routes/regist');
+var User = require('./models/mongodef');
 
 var app = express();
 
@@ -28,6 +29,23 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/regist', regist);
+
+app.post('/process' , function(req,res){
+    console.log( 'process is done.' );
+    console.log( 'mail is ' + req.body.mail );
+    console.log( 'pwd is ' + req.body.pwd );
+
+    var newUser = new User({
+        mail : req.body.mail,
+        pwd : req.body.pwd,
+        is_seller : false,
+    });
+
+    // save to mongodb
+    newUser.save();
+
+    res.redirect( 303, '/');
+});
 
 app.get('/find',function(request,response){
     // find from mongodb
