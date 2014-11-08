@@ -4,7 +4,8 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res) {
   res.render('login' , {
-  	title : 'ログイン'
+  	title : 'ログイン',
+  	is_visible : 'hidden'
   });
 });
 

@@ -3,9 +3,10 @@ extends layout
 block content
 	h1= title
 	p Regist to #{title}
-	form( action='/process' , method='POST' )
+	form( action='/process/regist' , method='POST' )
 		.input-group.input-group-sm
 			input.form-control( id='mail' , type='text', placeholder='mail' , name='mail' )
 			input.form-control( id='pwd' , type='password', placeholder='Password' , name='pwd' )
+		.alert.alert-danger(class='#{is_visible}') #{caution}
 		.btn-group
 			button( id='regist' , type='submit' , class='btn btn-default btn-sm') 新規登録
