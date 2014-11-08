@@ -56,7 +56,7 @@ module.exports = function(grunt) {
             check : {
                 options : {
                     outputStyle: 'nested',
-                    sassDir : 'public/sass' , 
+                    sassDir : 'public/stylesheets/sass' , 
                     cssDir : 'public/sass/lint'
                 }
             },
@@ -64,8 +64,8 @@ module.exports = function(grunt) {
                 options : {
                     sourcemap: true,
                     outputStyle: 'compressed',
-                    sassDir : 'public/sass' , 
-                    cssDir : 'public'
+                    sassDir : 'public/stylesheets/sass' , 
+                    cssDir : 'public/stylesheets/'
                 }
             }
         },
@@ -84,16 +84,14 @@ module.exports = function(grunt) {
                 src : ['public/sass/lint/*.css']
             }
         },
-        haml : {
-            dist : {
-                files: {
-                    'public/index.html' : [ 'public/haml/index.haml' ]
-                }
+        command: {
+            dev : {
+                cmd: 'node bin/www'
             }
         },
         watch: {
             html : {
-                files : [ 'public/haml/*.haml' , 'public/images/*.png' , 'public/images/**/*.png' ],
+                files : [ 'views/*.haml' , 'public/images/*.png' , 'public/images/**/*.png' ],
                 tasks : [ 'haml'],
                 options: {
                     livereload: true,
@@ -109,7 +107,7 @@ module.exports = function(grunt) {
                 }
             },
             sass : {
-                files : [ 'public/sass/*.sass' ],
+                files : [ 'public/stylesheets/sass/*.sass' ],
                 tasks: [ 'compass:check' , 'csslint' , 'compass:dist' ] ,
                 options: {
                     livereload: true,
@@ -117,8 +115,8 @@ module.exports = function(grunt) {
                 }
             },
             express: {
-                files:  [ 'app.js' , 'route/*.js' ],
-                tasks:  [ 'express:dev:stop' ],
+                files:  [ 'app.js' , 'routes/*.js' ],
+                tasks:  [ 'command' ],
                 options: {
                     delay: 1000
                 }
@@ -127,8 +125,8 @@ module.exports = function(grunt) {
     });
 
     [
+        'grunt-contrib-commands',
         'grunt-contrib-connect',
-        'grunt-contrib-haml',
         'grunt-express-server',
         'grunt-contrib-uglify',
         'grunt-contrib-concat',
@@ -141,5 +139,5 @@ module.exports = function(grunt) {
     })
 
     grunt.registerTask('build', [ 'haml' , 'jshint' , 'concat', 'uglify' , 'compass:check' , 'csslint' , 'compass:dist' ]);
-    grunt.registerTask('default', [ 'express:dev' , 'watch' ]);
+    grunt.registerTask('default', [ 'command' , 'watch' ]);
 };

@@ -9,7 +9,19 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
 
+var mongoose = require('mongoose');
+
 var app = express();
+
+var credential = require('./credential');
+var db       = mongoose.createConnection(credential.mongodb);
+var mouseSchema = new mongoose.Schema({
+    name        : String,
+    age         : Number,
+    is_pockemon : Boolean,  
+});
+// create object
+var Mouse = db.model('Mouse', mouseSchema);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +38,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
+
+app.get('/save',function(request,response){
+
+    // define data
+    var tom = new Mouse({
+        name       : 'Tom',
+        age        : 72,
+        is_pockemon: false,
+    });
+    var mickey = new Mouse({
+        name       : 'Mickey',
+        age        : 84,
+        is_pockemon: false,
+    });
+    var picachu = new Mouse({
+        name       : 'ぴかちゅー',
+        age        : 16,
+        is_pockemon: true,
+    });
+
+    // save to mongodb
+    tom.save();
+    mickey.save();
+    picachu.save();
+
+    response.send({'message' : '保存したよん'});
+});
+
+app.get('/find',function(request,response){
+    // find from mongodb
+    Mouse.find(function(err, mice){
+        if(err) console.log(err);
+        response.send(mice);
+    });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
