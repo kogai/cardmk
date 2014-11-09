@@ -39,6 +39,7 @@ router.post('/login/' , function(req,res){
             });
         }else{
             // login is success
+            req.session.login = query;
             res.redirect( 303, '/');
         }
     });
