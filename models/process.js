@@ -45,4 +45,9 @@ router.post('/login/' , function(req,res){
     });
 });
 
+router.post('/logout/' , function(req,res){
+    delete req.session.login;
+    res.redirect( 303, '/login');
+});
+
 module.exports = router;

@@ -5,10 +5,12 @@ var router = express.Router();
 router.get('/', function(req, res) {
 	if(!req.session.login){
 		res.redirect( 303 , '/regist' );
+	}else{
+		res.render('index', {
+			title : 'ホーム',
+			users: req.session.login.mail
+		});
 	}
-	res.render('index', {
-		title: 'ホーム'
-	});
 });
 
 module.exports = router;
