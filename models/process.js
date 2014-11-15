@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/mongodef');
+var MongoDB = require('../models/mongodef');
 
 router.post('/regist/' , function( req , res ){
-    var newUser = new User({
+    var newUser = new MongoDB.User({
         mail : req.body.mail,
         pwd : req.body.pwd,
         is_seller : false,
@@ -27,7 +27,7 @@ router.post('/login/' , function(req,res){
     var email    = req.body.mail;
     var password = req.body.pwd;
     var query = { "mail" : email , "pwd": password };
-    User.find( query , function( err , data ){
+    MongoDB.User.find( query , function( err , data ){
         if(err) {
             console.log(err);
         }else if( data.length === 0 ){
