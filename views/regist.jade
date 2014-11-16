@@ -4,7 +4,7 @@ block content
 	h1= title
 	p Regist to #{title}
 	p すでにアカウントを作成済みですか?こちらを<a href="/login">クリック</a>
-	form( action='/process/regist' , method='POST' )
+	form( action='/process/regist' , method='POST' , id='regist-wrap')
 		.input-group.input-group-sm
 			input.form-control( id='mail' , type='text', placeholder='mail' , name='mail' )
 			input.form-control( id='pwd' , type='password', placeholder='Password' , name='pwd' )

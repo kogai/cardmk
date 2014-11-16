@@ -87,6 +87,9 @@ module.exports = function(grunt) {
         command: {
             dev : {
                 cmd: 'node bin/www'
+            },
+            build : {
+                cmd: 'npm run build'
             }
         },
         watch: {
@@ -100,7 +103,7 @@ module.exports = function(grunt) {
             },
             js : {
                 files: [ 'public/javascripts/*.js' ],
-                tasks: [ 'jshint' , 'concat', 'uglify' ],
+                tasks: [ 'jshint' , 'command:build' /*'concat', 'uglify'*/ ],
                 options: {
                     livereload: true,
                     nospawn: true
@@ -116,7 +119,7 @@ module.exports = function(grunt) {
             },
             express: {
                 files:  [ 'app.js' , 'routes/*.js' ],
-                tasks:  [ 'command' ],
+                tasks:  [ 'command:dev' ],
                 options: {
                     delay: 1000
                 }
@@ -139,5 +142,5 @@ module.exports = function(grunt) {
     })
 
     grunt.registerTask('build', [ 'haml' , 'jshint' , 'concat', 'uglify' , 'compass:check' , 'csslint' , 'compass:dist' ]);
-    grunt.registerTask('default', [ 'command' , 'watch' ]);
+    grunt.registerTask('default', [ 'command:dev' , 'watch' ]);
 };

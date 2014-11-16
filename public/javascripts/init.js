@@ -1,3 +1,4 @@
-$(window).load(function(){
-	console.log('loaded.');
-});
+var Vue = require('vue');
+var validator = require('vue-validator');
+
+Vue.use(validator)
