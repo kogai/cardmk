@@ -1,7 +1,7 @@
 var $ = require('jquery');
-var regist = require('./regist');
+var validate = require('./validate');
 
 $(window).on( 'load' , function(){
 	console.log('loaded');
-	regist;
+	validate.regist;
 });
