@@ -37,6 +37,7 @@ router.post('/login/' , function(req,res){
                 is_visible : 'show',
                 caution : '入力した情報が間違っています'
             });
+            // res.redirect( 303, '/login');
         }else{
             // login is success
             req.session.login = query;
