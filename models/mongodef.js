@@ -13,10 +13,6 @@ var userSchema = new mongoose.Schema({
     is_seller : Boolean,
 });
 
-var sessionsSchema = new mongoose.Schema({
-    list : Array
-});
-
 // create object
 
 userSchema.plugin( uniqueValidator , { message: 'すでに登録されているメールアドレスです' });
