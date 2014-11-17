@@ -26,8 +26,9 @@ router.post('/regist/' , function( req , res ){
 router.post('/login/' , function(req,res){
     var email    = req.body.mail;
     var password = req.body.pwd;
-    var query = { "mail" : email , "pwd": password };
-    MongoDB.User.find( query , function( err , data ){
+    var query = { "mail" : email };
+
+    MongoDB.User.findOne( query , function( err , data ){
         if(err) {
             console.log(err);
         }else if( data.length === 0 ){
@@ -39,9 +40,21 @@ router.post('/login/' , function(req,res){
             });
             // res.redirect( 303, '/login');
         }else{
+        
+            data.comparePassword( password , function( err , isMatch ) {
+                if (err) throw err;
+                if (isMatch){                
+                    req.session.login = query;
+                    res.redirect( 303, '/');
+                }else{
+                    res.render('login', {
+                        title : 'エラー',
+                        is_visible : 'show',
+                        caution : '入力した情報が間違っています'
+                    });
+                };
+            });
             // login is success
-            req.session.login = query;
-            res.redirect( 303, '/');
         }
     });
 });
