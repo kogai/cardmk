@@ -93,16 +93,8 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            html : {
-                files : [ 'views/*.haml' , 'public/images/*.png' , 'public/images/**/*.png' ],
-                tasks : [ 'haml'],
-                options: {
-                    livereload: true,
-                    nospawn: true
-                }
-            },
             js : {
-                files: [ 'public/javascripts/*.js' ],
+                files: [ 'public/javascripts/*.js' , 'public/javascripts/lib/*.js' ],
                 tasks: [ 'jshint' , 'command:build' /*'concat', 'uglify'*/ ],
                 options: {
                     livereload: true,
@@ -142,5 +134,5 @@ module.exports = function(grunt) {
     })
 
     grunt.registerTask('build', [ 'haml' , 'jshint' , 'concat', 'uglify' , 'compass:check' , 'csslint' , 'compass:dist' ]);
-    grunt.registerTask('default', [ 'command:dev' , 'watch' ]);
+    grunt.registerTask('default', [ 'jshint' , 'command:build' , 'compass:check' , 'csslint' , 'compass:dist' , 'command:dev' , 'watch' ]);
 };

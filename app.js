@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var regist = require('./routes/regist');
 var process = require('./models/process');
+var credential = require('./credential');
 
 var app = express();
 
@@ -26,9 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret : 'keyboard cat',
-    cookie : { maxAge: 60 * 60 * 1000 },
-    // store : 'test'
+    secret : credential.session,
+    cookie : { maxAge : 30 * 24 * 60 * 60 * 1000 }
 }));
 
 app.use('/', routes);
