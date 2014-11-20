@@ -19,6 +19,8 @@ var userSchema = new mongoose.Schema({
     	type : String ,
     	required : true
     },
+    uuid : String,
+    is_verify : String,
     is_seller : Boolean,
 });
 

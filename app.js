@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
 var regist = require('./routes/regist');
+var verify = require('./routes/verify');
 var process = require('./models/process');
 var credential = require('./credential');
 
@@ -35,6 +36,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/regist', regist);
+app.use('/verify', verify);
 app.use('/process', process);
 
 // catch 404 and forward to error handler
