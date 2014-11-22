@@ -54,6 +54,12 @@ router.post('/login/' , function(req,res){
                 caution : '入力した情報が間違っています'
             });
             // res.redirect( 303, '/login');
+        }else if( data.is_verify === 'UNVERIFIED'){
+            res.render('login', {
+                title : 'エラー',
+                is_visible : 'show',
+                caution : 'メールアドレスが認証されていません。'
+            });
         }else{
         
             data.comparePassword( password , function( err , isMatch ) {
