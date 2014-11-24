@@ -3,6 +3,10 @@ var router = express.Router();
 var MongoDB = require('../models/mongodef');
 var mailer = require('../models/mailer');
 var uuid = require('node-uuid');
+var localStrategy = require('../models/login');
+var passport = require('passport');
+
+localStrategy
 
 router.post('/regist/' , function( req , res ){
     
@@ -38,50 +42,19 @@ router.post('/regist/' , function( req , res ){
     mailer(data);
 });
 
-router.post('/login/' , function(req,res){
-    var email    = req.body.mail;
-    var password = req.body.pwd;
-    var query = { "mail" : email };
-
-    MongoDB.User.findOne( query , function( err , data ){
-        if(err) {
-            console.log(err);
-        }else if( data.length === 0 ){
-            // login is err
-            res.render('login', {
-                title : 'エラー',
-                is_visible : 'show',
-                caution : '入力した情報が間違っています'
-            });
-            // res.redirect( 303, '/login');
-        }else if( data.is_verify === 'UNVERIFIED'){
-            res.render('login', {
-                title : 'エラー',
-                is_visible : 'show',
-                caution : 'メールアドレスが認証されていません。'
-            });
-        }else{
-        
-            data.comparePassword( password , function( err , isMatch ) {
-                if (err) throw err;
-                if (isMatch){                
-                    req.session.login = query;
-                    res.redirect( 303, '/');
-                }else{
-                    res.render('login', {
-                        title : 'エラー',
-                        is_visible : 'show',
-                        caution : '入力した情報が間違っています'
-                    });
-                };
-            });
-            // login is success
+router.post('/login/',
+    passport.authenticate(
+        'local',
+        {
+            successRedirect: '/',
+            failureRedirect: '/login',
+            failureFlash: true 
         }
-    });
-});
+    )
+);
 
 router.post('/logout/' , function(req,res){
-    delete req.session.login;
+    delete req.session.passport.user;
     res.redirect( 303, '/login');
 });
 

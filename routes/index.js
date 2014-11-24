@@ -4,12 +4,15 @@ var MongoDB = require('../models/mongodef');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	if(!req.session.login){
+	if(!req.session.passport.user){
 		res.redirect( 303 , '/regist' );
 	}else{
-		res.render('index', {
-			title : 'ホーム',
-			users: req.session.login.mail
+		MongoDB.User.findOne( { _id : req.session.passport.user} , function( err , user ){
+			if(err) console.log(err);
+			res.render('index', {
+				title : 'ホーム',
+				users: user.mail
+			});
 		});
 	}
 });

@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -13,6 +14,7 @@ var regist = require('./routes/regist');
 var verify = require('./routes/verify');
 var process = require('./models/process');
 var credential = require('./credential');
+var model_login = require('./models/login') 
 
 var app = express();
 
@@ -31,6 +33,8 @@ app.use(session({
     secret : credential.session,
     cookie : { maxAge : 30 * 24 * 60 * 60 * 1000 }
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
