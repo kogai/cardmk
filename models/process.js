@@ -3,10 +3,10 @@ var router = express.Router();
 var MongoDB = require('../models/mongodef');
 var mailer = require('../models/mailer');
 var uuid = require('node-uuid');
-var localStrategy = require('../models/login');
+var passportStrategy = require('../models/auth');
 var passport = require('passport');
 
-localStrategy
+passportStrategy
 
 router.post('/regist/' , function( req , res ){
     

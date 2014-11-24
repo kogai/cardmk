@@ -14,7 +14,6 @@ var regist = require('./routes/regist');
 var verify = require('./routes/verify');
 var process = require('./models/process');
 var credential = require('./credential');
-var model_login = require('./models/login') 
 
 var app = express();
 
@@ -35,6 +34,15 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter',
+    {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }));
 
 app.use('/', routes);
 app.use('/users', users);

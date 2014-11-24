@@ -10,15 +10,17 @@ var MongoDB = {};
 var userSchema = new mongoose.Schema({
     mail : {
     	type : String ,
-    	required : true ,
+    	// required : true ,
     	index : {
 	    	unique: true 
     	}
     },
     pwd : {
     	type : String ,
-    	required : true
+    	// required : true
     },
+    twitterId : String,
+    twitterName : String,
     uuid : String,
     is_verify : String,
     is_seller : Boolean,
